@@ -1,0 +1,257 @@
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+const int MAX_ORDERS = 20; // Maximum number of orders
+
+// Function to display the final order list summary
+void displayOrderSummary(string orderedItems[], int orderedPrices[], int orderCount) {
+    cout << "FINAL ORDER LIST SUMMARY:\n";
+    if (orderCount == 0) {
+        cout << "No items ordered." << endl;
+    } else {
+        cout << setw(30) << "ITEM" << setw(15) << "PRICE" << endl;
+        cout << "--------------------------------------------------------------------" << endl;
+        for (int i = 0; i < orderCount; ++i) {
+            cout << setw(30) << orderedItems[i] << setw(20) << "₱" << orderedPrices[i] << endl;
+        }
+        cout << "--------------------------------------------------------------------" << endl;
+    }
+}
+    // Function to calculate the total cost of all ordered items
+    int calculateTotal(int orderedPrices[], int orderCount) {
+        int total = 0;
+        for (int i = 0; i < orderCount; ++i) {
+            total += orderedPrices[i];
+        }
+        return total; }
+        
+    int main() {
+    char choice;
+
+    // Arrays to store ordered items and their prices
+    string orderedItems[MAX_ORDERS];
+    int orderedPrices[MAX_ORDERS];
+    int orderCount = 0;
+
+    // Arrays for menu items and their prices
+    string pastaMenu[] = {"Spaghetti Carbonara", "Fettuccine Alfredo", "Lasagna", "Penne Arrabbiata", "Ravioli Marinara"};
+    int pastaPrices[] = {250, 220, 280, 200, 270};
+
+    string pastryMenu[] = {"Croissant", "Danish Pastry", "Chocolate Eclair", "Fruit Tart", "Cinnamon Roll"};
+    int pastryPrices[] = {50, 60, 70, 65, 55};
+
+    string mainCourseMenu[] = {"Grilled Salmon", "Filet Mignon", "Chicken Marsala", "Beef Steak", "Roast Chicken"};
+    int mainCoursePrices[] = {380, 450, 320, 400, 300};
+
+    string saladMenu[] = {"Caesar Salad", "Greek Salad", "Caprese Salad", "Waldorf Salad", "Cobb Salad"};
+    int saladPrices[] = {180, 200, 150, 190, 210};
+
+    string beveragesMenu[] = {"Coffee", "Iced Tea", "Fresh Juice", "Soda", "Milkshake"};
+    int beveragesPrices[] = {80, 60, 100, 50, 120};
+
+    char category;
+
+    // Display the menu
+    cout << "____________________________________________________________________" << endl;
+    cout << setw(45) << "WELCOME TO THE CAFE" << endl;
+
+    do {
+        cout << "============================= FOOD MENU ===========================" << endl;
+        cout << "FOOD CATEGORY:\n";
+        cout << left << setw(30) << "A. PASTA" << right << setw(15) << "B. PASTRY" << endl;
+        cout << left << setw(30) << "C. MAIN COURSE" << right << setw(14) << "D. SALAD" << endl;
+        cout << left << setw(15) << "E. BEVERAGES" << endl;
+
+        cout << "Enter the category (A, B, C, D, E) or '0' to exit: ";
+        cin >> category;
+
+        switch (category) {
+            case 'A':
+            case 'a': {
+                int pastaChoice;
+                cout << "PASTA MENU:\n";
+                for (int i = 0; i < 5; ++i) {
+                    cout << "[A" << (i + 1) << "]. " << pastaMenu[i] << " - ₱" << pastaPrices[i] << endl;
+                }
+
+                cout << "\nPLEASE CHOOSE TO ORDER [1-5]: ";
+                cin >> pastaChoice;
+
+                // Validate the user's input for pastaChoice
+                if (pastaChoice >= 1 && pastaChoice <= 5 && orderCount < MAX_ORDERS) {
+                    orderedItems[orderCount] = pastaMenu[pastaChoice - 1];
+                    orderedPrices[orderCount] = pastaPrices[pastaChoice - 1];
+                    cout << "Added " << pastaMenu[pastaChoice - 1] << " to your order." << endl;
+                    orderCount++;
+                } else {
+                    cout << "Invalid choice or maximum orders reached." << endl;
+                }
+
+                break;
+            }
+
+            case 'B':
+            case 'b': {
+                int pastryChoice;
+                cout << "PASTRY MENU:\n";
+                for (int i = 0; i < 5; ++i) {
+                    cout << "[B" << (i + 1) << "]. " << pastryMenu[i] << " - ₱" << pastryPrices[i] << endl;
+                }
+
+                cout << "\nPLEASE CHOOSE TO ORDER [1-5]: ";
+                cin >> pastryChoice;
+
+                // Validate the user's input for pastryChoice
+                if (pastryChoice >= 1 && pastryChoice <= 5 && orderCount < MAX_ORDERS) {
+                    orderedItems[orderCount] = pastryMenu[pastryChoice - 1];
+                    orderedPrices[orderCount] = pastryPrices[pastryChoice - 1];
+                    cout << "Added " << pastryMenu[pastryChoice - 1] << " to your order." << endl;
+                    orderCount++;
+                } else {
+                    cout << "Invalid choice or maximum orders reached." << endl;
+                }
+
+                break;
+            }
+
+            case 'C':
+            case 'c': {
+                int mainCourseChoice;
+                cout << "MAIN COURSE MENU:\n";
+                for (int i = 0; i < 5; ++i) {
+                    cout << "[C" << (i + 1) << "]. " << mainCourseMenu[i] << " - ₱" << mainCoursePrices[i] << endl;
+                }
+
+                cout << "\nPLEASE CHOOSE TO ORDER [1-5]: ";
+                cin >> mainCourseChoice;
+
+                // Validate the user's input for mainCourseChoice
+                if (mainCourseChoice >= 1 && mainCourseChoice <= 5 && orderCount < MAX_ORDERS) {
+                    orderedItems[orderCount] = mainCourseMenu[mainCourseChoice - 1];
+                    orderedPrices[orderCount] = mainCoursePrices[mainCourseChoice - 1];
+                    cout << "Added " << mainCourseMenu[mainCourseChoice - 1] << " to your order." << endl;
+                    orderCount++;
+                } else {
+                    cout << "Invalid choice or maximum orders reached." << endl;
+                }
+
+                break;
+            }
+
+            case 'D':
+            case 'd': {
+                int saladChoice;
+                cout << "SALAD MENU:\n";
+                for (int i = 0; i < 5; ++i) {
+                    cout << "[D" << (i + 1) << "]. " << saladMenu[i] << " - ₱" << saladPrices[i] << endl;
+                }
+
+                cout << "\nPLEASE CHOOSE TO ORDER [1-5]: ";
+                cin >> saladChoice;
+
+                // Validate the user's input for saladChoice
+                if (saladChoice >= 1 && saladChoice <= 5 && orderCount < MAX_ORDERS) {
+                    orderedItems[orderCount] = saladMenu[saladChoice - 1];
+                    orderedPrices[orderCount] = saladPrices[saladChoice - 1];
+                    cout << "Added " << saladMenu[saladChoice - 1] << " to your order." << endl;
+                    orderCount++;
+                } else {
+                    cout << "Invalid choice or maximum orders reached." << endl;
+                }
+
+                break;
+            }
+
+            case 'E':
+            case 'e': {
+                int beverageChoice;
+                cout << "BEVERAGES MENU:\n";
+                for (int i = 0; i < 5; ++i) {
+                    cout << "[E" << (i + 1) << "]. " << beveragesMenu[i] << " - ₱" << beveragesPrices[i] << endl;
+                }
+
+                cout << "\nPLEASE CHOOSE TO ORDER [1-5]: ";
+                cin >> beverageChoice;
+
+                // Validate the user's input for beverageChoice
+                if (beverageChoice >= 1 && beverageChoice <= 5 && orderCount < MAX_ORDERS) {
+                    orderedItems[orderCount] = beveragesMenu[beverageChoice - 1];
+                    orderedPrices[orderCount] = beveragesPrices[beverageChoice - 1];
+                    cout << "Added " << beveragesMenu[beverageChoice - 1] << " to your order." << endl;
+                    orderCount++;
+                } else {
+                    cout << "Invalid choice or maximum orders reached." << endl;
+                }
+
+                break;
+            }
+
+            case 'S':
+            case 's': {
+                // Summary option to display ordered items and their prices
+                cout << "ORDER SUMMARY:\n";
+                if (orderCount == 0) {
+                    cout << "No items ordered yet." << endl;
+                } else {
+                    cout << setw(30) << "ITEM" << setw(15) << "PRICE" << endl;
+                    cout << "---------------------------------------" << endl;
+                    for (int i = 0; i < orderCount; ++i) {
+                        cout << setw(30) << orderedItems[i] << setw(15) << "₱" << orderedPrices[i] << endl;
+                    }
+                    cout << "---------------------------------------" << endl;
+                }
+                break;
+            }
+
+            case '0':
+                cout << "Thank you for visiting!";
+                return 0;
+
+            default:
+                cout << "Invalid choice";
+                break;
+        }
+
+        cout << "Do you like to add more items? (Y/N): ";
+        cin >> choice;
+
+    } while (choice == 'Y' || choice == 'y');
+    
+    displayOrderSummary(orderedItems, orderedPrices, orderCount);
+    
+    // Calculate and display the total cost
+    int totalCost = calculateTotal(orderedPrices, orderCount);
+    cout << "Total Cost: ₱" << totalCost << endl;
+
+    // Payment method prompt
+    char paymentMethod;
+    cout << "Enter payment method ('C' for Card, 'A' for Cash): ";
+    cin >> paymentMethod;
+
+    if (paymentMethod == 'C' || paymentMethod == 'c') {
+        cout << "You have chosen to pay by Card." << endl;
+        // Add Card payment logic here
+    } else if (paymentMethod == 'A' || paymentMethod == 'a') {
+        cout << "You have chosen to pay by Cash." << endl;
+        
+        // Cash payment logic
+        int tenderAmount;
+        cout << "Enter tender amount: ₱";
+        cin >> tenderAmount;
+
+        if (tenderAmount < totalCost) {
+            cout << "Insufficient amount. Please enter an amount equal to or greater than the total cost." << endl;
+        } else {
+            int change = tenderAmount - totalCost;
+            cout << "Change: ₱" << change << endl;
+            // Additional cash payment handling can be added here if necessary
+        }
+    } else {
+        cout << "Invalid payment method." << endl;
+    }
+
+    return 0;
+}
+
